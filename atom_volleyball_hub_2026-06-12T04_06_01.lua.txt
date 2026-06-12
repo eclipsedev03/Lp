@@ -1,0 +1,771 @@
+-- [[ ATOM GENERATOR - KEY SYSTEM COMPLETO ]]
+-- =====================================================
+-- SISTEMA DE VALIDAÇÃO DE KEY (COM LISTA NEGRA)
+-- =====================================================
+
+local KeysValidas = [
+  "LP-0KFA-HXB6-Q73Y",
+  "LP-AU0Y-JJ97-26JY",
+  "LP-7EF7-QMHP-1F30",
+  "LP-2B19-99ZK-WVK4",
+  "LP-J8BN-H3Z1-20QY",
+  "LP-G7L0-YNCS-XSU2",
+  "LP-MXBE-5M5E-E8A7",
+  "LP-MAJK-FF7L-QVT0",
+  "LP-BAHW-7E2J-ZWZM",
+  "LP-N7CA-LHUN-4C4E",
+  "LP-H57R-AN1P-MH2S",
+  "LP-SPYF-8UA7-KDPT",
+  "LP-TTCT-9DBQ-L3M2",
+  "LP-ETT5-R5XH-M9Y6",
+  "LP-AQTV-5KQ1-SG2U",
+  "LP-KSFS-RXFT-N0VH",
+  "LP-VN8P-R3YV-SKS0",
+  "LP-TMC5-C4X8-2H5S",
+  "LP-10GH-1GVK-9E04",
+  "LP-ZZN9-LQ14-E60R",
+  "LP-KR22-A45Y-C0J6",
+  "LP-YPED-6AY0-UMUU",
+  "LP-5TKK-2BT6-5SWL",
+  "LP-92T6-KEVB-R3QH",
+  "LP-R90D-4RNJ-TLVB",
+  "LP-PWGD-5HZH-5DQY",
+  "LP-4YMF-3CWG-SX77",
+  "LP-3C7E-2MUP-1V56",
+  "LP-VMRS-2SHS-NYZR",
+  "LP-ELSE-P3S7-F9GU",
+  "LP-2MSU-N1P4-5GV1",
+  "LP-BP07-GX17-5ATB",
+  "LP-9J7Z-VL85-YF48",
+  "LP-QK9D-LX0W-M2VT",
+  "LP-KFZW-2FHX-ALU3",
+  "LP-5RY5-NPM2-26Q2",
+  "LP-JK14-YHF8-0T9J",
+  "LP-W5YN-CVGE-HJJ4",
+  "LP-Y3PZ-VP2Z-YQAR",
+  "LP-RSY4-S7PL-XMFW",
+  "LP-EBHA-LXRH-FKT5",
+  "LP-X44R-FXT5-85MT",
+  "LP-J2SL-JZH3-FS06",
+  "LP-G1LF-1AGW-G2L4",
+  "LP-T757-FM61-2VWA",
+  "LP-ASBM-81DC-D4JU",
+  "LP-1CUW-B9TK-8EDF",
+  "LP-1LX1-0AFV-6ZT3",
+  "LP-JE76-AUQ2-S05N",
+  "LP-VHZ7-07EJ-P0N5",
+  "LP-XM2H-0FFV-DY4R",
+  "LP-ATJ8-7YDN-6Y9B",
+  "LP-J0VE-N174-Q4VL",
+  "LP-1MZN-PYL8-FMZS",
+  "LP-VSWL-DCQB-FQNZ",
+  "LP-L45W-JEYC-B85N",
+  "LP-43S7-BMZ8-Y1L0",
+  "LP-49CW-BCMA-LS1F",
+  "LP-GUXD-GQ0M-D8U8",
+  "LP-SA7Y-B0PZ-YA51",
+  "LP-JH2Q-87JR-JDUS",
+  "LP-HN4L-MACL-E9VF",
+  "LP-ZR8F-5MB2-YKA7",
+  "LP-AA1X-8TK0-FXAJ",
+  "LP-5PQW-5LTX-FQRE",
+  "LP-DLKL-77GJ-QWLT",
+  "LP-4AMR-Q7UM-TERV",
+  "LP-FW0G-SBU4-6U09",
+  "LP-4HDK-Z7PW-2150",
+  "LP-13YL-7DWQ-1ZT2",
+  "LP-KX39-GSK5-ZGRA",
+  "LP-WBA7-BQYK-775Y",
+  "LP-JVNN-7GY7-Z575",
+  "LP-KGRN-CRTD-F45T",
+  "LP-UDJ4-T2KD-BSXW",
+  "LP-GXB8-7NXA-U9BD",
+  "LP-1W7E-564F-J248",
+  "LP-VP1A-FMXN-ZR64",
+  "LP-JLPV-7EYH-JLCM",
+  "LP-N86K-XP81-6DWA",
+  "LP-UT14-KR0H-5YTV",
+  "LP-DFX5-QU4T-9JM1",
+  "LP-YBTW-0BE7-F2WD",
+  "LP-B423-ABGS-CNXJ",
+  "LP-29W7-TBFG-PZN1",
+  "LP-24ES-35T2-BRXZ",
+  "LP-81K3-TJD7-0BWF",
+  "LP-6E49-4HN8-FLJW",
+  "LP-106J-YFX4-MZPH",
+  "LP-12UV-D1EE-HDXX",
+  "LP-AADT-MYXT-RNK4",
+  "LP-3JQK-BN1N-F590",
+  "LP-67F0-U0NS-WNNS",
+  "LP-24VJ-TH9W-7V21",
+  "LP-9983-SJRL-43DP",
+  "LP-QE7A-L8FW-7RQ3",
+  "LP-VRFP-4SJ9-SQCJ",
+  "LP-D41N-7D3F-62HK",
+  "LP-8BE5-Z675-F7JS",
+  "LP-KSK6-TUNB-LEBX",
+  "LP-YPKH-YDLM-0M5R",
+  "LP-Z004-5WK0-0XNK",
+  "LP-86CV-T1MW-AQYR",
+  "LP-5DSL-P9YZ-QRNG",
+  "LP-1641-UMVE-3FLR",
+  "LP-YMAY-VS10-3X9X",
+  "LP-YPTQ-ES9F-WVFP",
+  "LP-3KHG-9B8Y-WEKS",
+  "LP-76FB-YHV3-8L52",
+  "LP-4SC5-HYP2-L9BH",
+  "LP-K4PF-T3AS-E2AX",
+  "LP-Q8LD-QYFL-LS6R",
+  "LP-JK61-FRCQ-M5S7",
+  "LP-BGKU-W5H9-MBPR",
+  "LP-XA9B-772L-RMH1",
+  "LP-T54X-FZ8K-YXST",
+  "LP-8XE3-0MPJ-P2VX",
+  "LP-D4VK-ZSC3-5GQG",
+  "LP-JMBH-4DM6-RWV7",
+  "LP-SC65-HTAB-FTRN",
+  "LP-UCCX-UY0H-PGZB",
+  "LP-REAT-H6PM-W0EL",
+  "LP-5NYU-0JYN-4FPW",
+  "LP-FZNR-VLZM-VDMK",
+  "LP-36SF-75XV-0B2V",
+  "LP-AHW8-1V9M-GVJL",
+  "LP-EJ4C-G0RH-HXKV",
+  "LP-AZHX-B6J4-9E9M",
+  "LP-CX9N-5TCE-0RRM",
+  "LP-6UDS-B3C3-8J4N",
+  "LP-GMN8-SJH9-ZLYP",
+  "LP-S9YH-P0PC-1BB0",
+  "LP-K5RH-NRFF-8956",
+  "LP-2PV1-9NC8-48AQ",
+  "LP-7GUW-HU4Z-WC7P",
+  "LP-92MS-XLWK-LLJ8",
+  "LP-LT6P-AVFM-8TJ1",
+  "LP-RZ8G-US1Y-XWD6",
+  "LP-GPAB-DU3W-41Y5",
+  "LP-KT0K-TH17-BB6H",
+  "LP-7RJG-4S5U-XXJ6",
+  "LP-W7XS-E3KD-N8XZ",
+  "LP-JNCP-CPGK-QUJY",
+  "LP-XE8E-BMUN-EQZK",
+  "LP-1MZA-PRAC-1ZCD",
+  "LP-MBNF-0CZV-2XS7",
+  "LP-2VQW-CL4F-CZLF",
+  "LP-82NY-MPPP-FZKP",
+  "LP-8YUY-TN1P-FB82",
+  "LP-V38U-D7H8-7EZT",
+  "LP-EKWT-NJ28-0DTF",
+  "LP-SAAA-G4D4-RHH0",
+  "LP-93KS-8Z29-CPY4",
+  "LP-48XQ-51CZ-WZPM",
+  "LP-CWU1-CBW4-5BVG",
+  "LP-LF47-QG9X-HR4U",
+  "LP-QSMP-HCPH-GS2Z",
+  "LP-KML8-FNRF-PUU9",
+  "LP-EQM0-BR07-ZM92",
+  "LP-6E06-RLE0-6VG8",
+  "LP-FPL2-6SLR-JF5R",
+  "LP-NDTM-7ZTN-ZPBZ",
+  "LP-D3B6-6SB4-365N",
+  "LP-0C6V-X1BT-7ALF",
+  "LP-Q0BE-EZWM-KH4P",
+  "LP-ZNK6-5Q9N-C5YX",
+  "LP-XK09-B21U-2HU2",
+  "LP-39PZ-LFX5-PJ9X",
+  "LP-EFXH-PM9W-R5T1",
+  "LP-JW2Q-68MM-EQZN",
+  "LP-1VA6-4GQ7-RM8L",
+  "LP-EF7Z-5XCG-DCE1",
+  "LP-9DQJ-WLLG-CCRD",
+  "LP-DZZ1-DD61-FBLC",
+  "LP-G38Q-988K-TN87",
+  "LP-YYTK-396B-EP4J",
+  "LP-300D-4WEU-52MU",
+  "LP-FMZJ-DSTD-CV4L",
+  "LP-T5PS-LZKQ-HNLX",
+  "LP-1HB7-DHAL-LMK6",
+  "LP-2JW5-CM5X-MGH3",
+  "LP-33RK-XKNU-BGHC",
+  "LP-BJJM-7782-60MJ",
+  "LP-HW4B-SYN1-BE1L",
+  "LP-U26K-97WT-L0ZR",
+  "LP-T4H2-S35A-LXUG",
+  "LP-7WUJ-MSA5-1Z6Q",
+  "LP-5YTQ-6G2H-YW96",
+  "LP-N864-BYGC-SBT6",
+  "LP-G1RF-BRCU-GHJ4",
+  "LP-GY07-QVLS-F4RH",
+  "LP-DCZ9-M6WM-2H6Y",
+  "LP-UHMA-NRWH-EL78",
+  "LP-XD0Z-27UY-4J7C",
+  "LP-YDPD-U4JS-7VTG",
+  "LP-1VY7-NM7F-7J7M",
+  "LP-Q8HB-S2JN-1K36",
+  "LP-1KEM-23EA-VV9P",
+  "LP-0TPS-K551-MPPH",
+  "LP-9NF4-CBWQ-TS1Y",
+  "LP-LPWL-FGZ8-LPNC",
+  "LP-NEWE-A022-XYS4",
+  "LP-6T72-DC5A-8B7V",
+  "LP-843Z-HC7A-6DTU",
+  "LP-J6NL-U1GM-EZTY",
+  "LP-GL2Y-G21L-GDCT",
+  "LP-VHBK-1GJ5-T2J6",
+  "LP-X35V-Y0BK-0UX8",
+  "LP-QFJZ-RXF0-26TL",
+  "LP-VU6P-9W5L-VF72",
+  "LP-R436-J2XM-0WJ0",
+  "LP-GKRV-54BS-170F",
+  "LP-WFR2-ZX6M-P7SY",
+  "LP-KZ5G-MJ1Z-0D50",
+  "LP-H7AJ-XY87-MH12",
+  "LP-QJFN-S45R-Y716",
+  "LP-UVG8-P9ST-FAMB",
+  "LP-GLT2-A7P7-F98G",
+  "LP-BS5C-6PX2-Z27Z",
+  "LP-34GB-HLKZ-2XWU",
+  "LP-NB90-U6R4-L562",
+  "LP-4LWD-T6Q2-CW1L",
+  "LP-1908-WDDC-54PL",
+  "LP-VXE8-M0E2-FQMX",
+  "LP-53DC-X3S2-FTWW",
+  "LP-S54C-PLQ2-VX6M",
+  "LP-HS0Q-MX0L-9FGG",
+  "LP-Q501-AZMN-V3WB",
+  "LP-FZJH-AGAF-GCHX",
+  "LP-ZNEQ-XCRB-QHY0",
+  "LP-97XD-HSA1-USCX",
+  "LP-JM43-KXP7-453X",
+  "LP-NKFG-LSCP-4QWB",
+  "LP-7S97-2FQ0-JABN",
+  "LP-4S29-WMB7-ZNTN",
+  "LP-25E6-Y1U4-TM51",
+  "LP-JVV6-AEPU-NMKK",
+  "LP-W7K5-JRSZ-8214",
+  "LP-UNW0-U1UU-RR15",
+  "LP-JXJR-H66Y-SN3S",
+  "LP-3NNU-FPVF-P89B",
+  "LP-5YV1-FE0L-T3A9",
+  "LP-HGH3-A9E4-E9NG",
+  "LP-YUFL-EPRU-T988",
+  "LP-SB5V-5KPZ-HBGQ",
+  "LP-UDPB-QHAG-WNWN",
+  "LP-UYTB-5VUC-CXYV",
+  "LP-RUMR-ZMR2-0HYW",
+  "LP-1J0B-MRPY-RQXW",
+  "LP-N054-0GBW-1QZ2",
+  "LP-WJGT-R0S6-0M1A",
+  "LP-GL7L-TQPN-4HAF",
+  "LP-HBP9-E1LR-RT7Y",
+  "LP-DAL9-VF12-KB45",
+  "LP-ZTQR-N7FW-HG5L",
+  "LP-K2CA-ZS69-BFQJ",
+  "LP-6LGC-L28L-73PD"
+]
+local KeysRevogadas = []
+
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local VirtualUser = game:GetService("VirtualUser")
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- =====================================================
+-- INTERFACE DO HUB (LP STORE STYLE)
+-- =====================================================
+local function CreateHubInterface()
+    if CoreGui:FindFirstChild("Atom_Hub") then CoreGui:FindFirstChild("Atom_Hub"):Destroy() end
+    
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "Atom_Hub"
+    ScreenGui.Parent = CoreGui
+    ScreenGui.ResetOnSpawn = false
+    
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Parent = ScreenGui
+    MainFrame.Size = UDim2.new(0, 500, 0, 400)
+    MainFrame.Position = UDim2.new(0.5, -250, 0.5, -200)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    MainFrame.BackgroundTransparency = 0
+    MainFrame.Active = true
+    MainFrame.Draggable = true
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
+    
+    local Title = Instance.new("TextLabel")
+    Title.Parent = MainFrame
+    Title.Size = UDim2.new(1, 0, 0, 45)
+    Title.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    Title.Text = "⚡ ATOM VOLLEYBALL HUB ⚡"
+    Title.TextColor3 = Color3.fromRGB(0, 255, 204)
+    Title.Font = Enum.Font.Code
+    Title.TextSize = 18
+    Instance.new("UICorner", Title).CornerRadius = UDim.new(0, 12)
+    
+    local TabContainer = Instance.new("Frame")
+    TabContainer.Parent = MainFrame
+    TabContainer.Size = UDim2.new(0, 120, 1, -45)
+    TabContainer.Position = UDim2.new(0, 0, 0, 45)
+    TabContainer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    
+    local ContentContainer = Instance.new("Frame")
+    ContentContainer.Parent = MainFrame
+    ContentContainer.Size = UDim2.new(1, -120, 1, -45)
+    ContentContainer.Position = UDim2.new(0, 120, 0, 45)
+    ContentContainer.BackgroundColor3 = Color3.fromRGB(12, 12, 12)
+    
+    local ToggleButton = Instance.new("TextButton")
+    ToggleButton.Parent = ScreenGui
+    ToggleButton.Size = UDim2.new(0, 120, 0, 35)
+    ToggleButton.Position = UDim2.new(0.02, 0, 0.02, 0)
+    ToggleButton.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    ToggleButton.Text = "⚡ ATOM"
+    ToggleButton.TextColor3 = Color3.fromRGB(0, 255, 204)
+    ToggleButton.Font = Enum.Font.Code
+    ToggleButton.TextSize = 14
+    Instance.new("UICorner", ToggleButton).CornerRadius = UDim.new(0, 8)
+    ToggleButton.MouseButton1Click:Connect(function()
+        MainFrame.Visible = not MainFrame.Visible
+    end)
+    
+    local tabs = {}
+    local currentTab = nil
+    
+    function tabs:CreateTab(tabName)
+        local TabButton = Instance.new("TextButton")
+        TabButton.Parent = TabContainer
+        TabButton.Size = UDim2.new(1, 0, 0, 40)
+        TabButton.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        TabButton.Text = tabName
+        TabButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+        TabButton.Font = Enum.Font.Code
+        TabButton.TextSize = 12
+        
+        local TabContent = Instance.new("ScrollingFrame")
+        TabContent.Parent = ContentContainer
+        TabContent.Size = UDim2.new(1, 0, 1, 0)
+        TabContent.BackgroundTransparency = 1
+        TabContent.ScrollBarThickness = 4
+        TabContent.Visible = false
+        TabContent.CanvasSize = UDim2.new(0, 0, 0, 0)
+        
+        local UIList = Instance.new("UIListLayout")
+        UIList.Parent = TabContent
+        UIList.Padding = UDim.new(0, 8)
+        UIList.SortOrder = Enum.SortOrder.LayoutOrder
+        
+        TabButton.MouseButton1Click:Connect(function()
+            for _, child in pairs(ContentContainer:GetChildren()) do
+                if child:IsA("ScrollingFrame") then child.Visible = false end
+            end
+            for _, btn in pairs(TabContainer:GetChildren()) do
+                if btn:IsA("TextButton") then
+                    btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+                    btn.TextColor3 = Color3.fromRGB(200, 200, 200)
+                end
+            end
+            TabContent.Visible = true
+            TabButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            TabButton.TextColor3 = Color3.fromRGB(0, 255, 204)
+        end)
+        
+        if not currentTab then
+            TabButton.MouseButton1Click:Fire()
+            currentTab = tabName
+        end
+        
+        local tabFunctions = {}
+        
+        function tabFunctions:CreateToggle(config)
+            local frame = Instance.new("Frame")
+            frame.Parent = TabContent
+            frame.Size = UDim2.new(1, -20, 0, 35)
+            frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+            Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 6)
+            
+            local label = Instance.new("TextLabel")
+            label.Parent = frame
+            label.Size = UDim2.new(1, -60, 1, 0)
+            label.Position = UDim2.new(0, 10, 0, 0)
+            label.BackgroundTransparency = 1
+            label.Text = config.Name
+            label.TextColor3 = Color3.fromRGB(220, 220, 220)
+            label.Font = Enum.Font.Code
+            label.TextSize = 12
+            label.TextXAlignment = Enum.TextXAlignment.Left
+            
+            local toggle = Instance.new("TextButton")
+            toggle.Parent = frame
+            toggle.Size = UDim2.new(0, 40, 0, 25)
+            toggle.Position = UDim2.new(1, -50, 0.5, -12.5)
+            toggle.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            toggle.Text = "OFF"
+            toggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+            toggle.Font = Enum.Font.Code
+            toggle.TextSize = 10
+            Instance.new("UICorner", toggle).CornerRadius = UDim.new(0, 4)
+            
+            local state = false
+            toggle.MouseButton1Click:Connect(function()
+                state = not state
+                if state then
+                    toggle.BackgroundColor3 = Color3.fromRGB(0, 170, 136)
+                    toggle.Text = "ON"
+                    toggle.TextColor3 = Color3.fromRGB(100, 255, 100)
+                else
+                    toggle.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+                    toggle.Text = "OFF"
+                    toggle.TextColor3 = Color3.fromRGB(255, 100, 100)
+                end
+                if config.Callback then config.Callback(state) end
+            end)
+            
+            -- Carrega estado inicial se existir
+            if config.Default then
+                toggle.MouseButton1Click:Fire()
+            end
+        end
+        
+        function tabFunctions:CreateButton(config)
+            local btn = Instance.new("TextButton")
+            btn.Parent = TabContent
+            btn.Size = UDim2.new(1, -20, 0, 35)
+            btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+            btn.Text = config.Name
+            btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+            btn.Font = Enum.Font.Code
+            btn.TextSize = 12
+            Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+            btn.MouseButton1Click:Connect(config.Callback)
+        end
+        
+        function tabFunctions:CreateLabel(text, color)
+            local label = Instance.new("TextLabel")
+            label.Parent = TabContent
+            label.Size = UDim2.new(1, -20, 0, 30)
+            label.BackgroundTransparency = 1
+            label.Text = text
+            label.TextColor3 = color or Color3.fromRGB(200, 200, 200)
+            label.Font = Enum.Font.Code
+            label.TextSize = 11
+            label.TextXAlignment = Enum.TextXAlignment.Left
+        end
+        
+        return tabFunctions
+    end
+    
+    return tabs
+end
+
+-- =====================================================
+-- FUNÇÕES DO CHEAT (LENDAS DO VOLEIBOL)
+-- =====================================================
+local toggles = {
+    autoFarm = false,
+    autoHit = false,
+    magneticHitbox = false,
+    antiAFK = false
+}
+
+local player = Player
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+-- Anti AFK
+local function SetupAntiAFK()
+    if not VirtualUser then return end
+    player.Idled:Connect(function()
+        if toggles.antiAFK then
+            VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+            task.wait(0.5)
+            VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+        end
+    end)
+end
+
+-- Auto Farm (simula treinos)
+local function StartAutoFarm()
+    task.spawn(function()
+        while toggles.autoFarm and task.wait(2) do
+            pcall(function()
+                local args = {[1] = "TrainStrength"}
+                local remote = ReplicatedStorage:FindFirstChild("TrainRemote")
+                if remote then remote:FireServer(unpack(args)) end
+            end)
+        end
+    end)
+end
+
+-- Auto Hit / Ball Tracker
+local function StartAutoHit()
+    task.spawn(function()
+        while toggles.autoHit and task.wait(0.1) do
+            pcall(function()
+                local ball = nil
+                for _, obj in ipairs(workspace:GetChildren()) do
+                    if obj:IsA("Model") and (obj.Name:lower():find("ball") or obj.Name:lower():find("bola")) then
+                        ball = obj
+                        break
+                    end
+                end
+                if ball and hrp then
+                    local ballPart = ball:FindFirstChildWhichIsA("BasePart")
+                    if ballPart then
+                        local distance = (hrp.Position - ballPart.Position).Magnitude
+                        if distance < 15 then
+                            local args = {[1] = "Hit"}
+                            local remote = ReplicatedStorage:FindFirstChild("HitRemote")
+                            if remote then remote:FireServer(unpack(args)) end
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+end
+
+-- Hitbox Magnética
+local function StartMagneticHitbox()
+    task.spawn(function()
+        while toggles.magneticHitbox and task.wait(0.05) do
+            pcall(function()
+                for _, obj in ipairs(workspace:GetChildren()) do
+                    if obj:IsA("Model") and (obj.Name:lower():find("ball") or obj.Name:lower():find("bola")) then
+                        local ballPart = obj:FindFirstChildWhichIsA("BasePart")
+                        if ballPart then
+                            ballPart.Size = Vector3.new(8, 8, 8)
+                            ballPart.CanCollide = false
+                            ballPart.Transparency = 0.5
+                        end
+                    end
+                end
+                if character then
+                    for _, limb in ipairs(character:GetChildren()) do
+                        if limb:IsA("BasePart") and (limb.Name:lower():find("arm") or limb.Name:lower():find("hand")) then
+                            limb.Size = Vector3.new(3, 3, 3)
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+end
+
+-- =====================================================
+-- INTERFACE DO SISTEMA DE KEY
+-- =====================================================
+local function DestroyOldKeyGui()
+    local existing = CoreGui:FindFirstChild("Atom_KeySystem")
+    if existing then existing:Destroy() end
+end
+
+local function CreateKeySystem()
+    DestroyOldKeyGui()
+    
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "Atom_KeySystem"
+    ScreenGui.Parent = CoreGui
+    ScreenGui.ResetOnSpawn = false
+    
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Parent = ScreenGui
+    MainFrame.Size = UDim2.new(0, 450, 0, 280)
+    MainFrame.Position = UDim2.new(0.5, -225, 0.5, -140)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
+    
+    local Title = Instance.new("TextLabel")
+    Title.Parent = MainFrame
+    Title.Size = UDim2.new(1, 0, 0, 45)
+    Title.Position = UDim2.new(0, 0, 0, 0)
+    Title.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    Title.Text = "⚡ ATOM KEY SYSTEM ⚡"
+    Title.TextColor3 = Color3.fromRGB(0, 255, 204)
+    Title.Font = Enum.Font.Code
+    Title.TextSize = 18
+    Instance.new("UICorner", Title).CornerRadius = UDim.new(0, 12)
+    
+    local Subtitle = Instance.new("TextLabel")
+    Subtitle.Parent = MainFrame
+    Subtitle.Size = UDim2.new(1, 0, 0, 25)
+    Subtitle.Position = UDim2.new(0, 0, 0, 45)
+    Subtitle.BackgroundTransparency = 1
+    Subtitle.Text = "Insira sua chave de ativação"
+    Subtitle.TextColor3 = Color3.fromRGB(150, 150, 150)
+    Subtitle.Font = Enum.Font.Code
+    Subtitle.TextSize = 12
+    
+    local KeyBox = Instance.new("TextBox")
+    KeyBox.Parent = MainFrame
+    KeyBox.Size = UDim2.new(0, 300, 0, 40)
+    KeyBox.Position = UDim2.new(0.5, -150, 0, 80)
+    KeyBox.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    KeyBox.Text = ""
+    KeyBox.PlaceholderText = "LP-XXXX-XXXX-XXXX"
+    KeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    KeyBox.Font = Enum.Font.Code
+    KeyBox.TextSize = 14
+    Instance.new("UICorner", KeyBox).CornerRadius = UDim.new(0, 6)
+    
+    local ValidateBtn = Instance.new("TextButton")
+    ValidateBtn.Parent = MainFrame
+    ValidateBtn.Size = UDim2.new(0, 140, 0, 40)
+    ValidateBtn.Position = UDim2.new(0.5, -150, 0, 140)
+    ValidateBtn.BackgroundColor3 = Color3.fromRGB(40, 100, 40)
+    ValidateBtn.Text = "VALIDAR KEY"
+    ValidateBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    ValidateBtn.Font = Enum.Font.Code
+    ValidateBtn.TextSize = 14
+    Instance.new("UICorner", ValidateBtn).CornerRadius = UDim.new(0, 6)
+    
+    local CopyBtn = Instance.new("TextButton")
+    CopyBtn.Parent = MainFrame
+    CopyBtn.Size = UDim2.new(0, 140, 0, 40)
+    CopyBtn.Position = UDim2.new(0.5, 10, 0, 140)
+    CopyBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 80)
+    CopyBtn.Text = "COPIAR KEY"
+    CopyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    CopyBtn.Font = Enum.Font.Code
+    CopyBtn.TextSize = 14
+    Instance.new("UICorner", CopyBtn).CornerRadius = UDim.new(0, 6)
+    
+    local MessageLabel = Instance.new("TextLabel")
+    MessageLabel.Parent = MainFrame
+    MessageLabel.Size = UDim2.new(0, 400, 0, 30)
+    MessageLabel.Position = UDim2.new(0.5, -200, 0, 200)
+    MessageLabel.BackgroundTransparency = 1
+    MessageLabel.Text = ""
+    MessageLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+    MessageLabel.Font = Enum.Font.Code
+    MessageLabel.TextSize = 12
+    
+    local function ShowMessage(text, isError)
+        MessageLabel.Text = text
+        MessageLabel.TextColor3 = isError and Color3.fromRGB(255, 100, 100) or Color3.fromRGB(100, 255, 100)
+        task.wait(3)
+        MessageLabel.Text = ""
+    end
+    
+    local function CopyToClipboard(text)
+        local clipboard = game:GetService("Clipboard")
+        if clipboard then
+            clipboard:set(text)
+            ShowMessage("Key copiada!", false)
+        else
+            ShowMessage("Erro ao copiar", true)
+        end
+    end
+    
+    local function IsKeyRevoked(key)
+        for _, revokedKey in ipairs(KeysRevogadas) do
+            if key == revokedKey then
+                return true
+            end
+        end
+        return false
+    end
+    
+    local function ValidateKey(inputKey)
+        if IsKeyRevoked(inputKey) then
+            return false, "KEY REVOGADA! Contate o suporte."
+        end
+        
+        for _, validKey in ipairs(KeysValidas) do
+            if inputKey == validKey then
+                return true, "KEY VÁLIDA!"
+            end
+        end
+        return false, "KEY INVÁLIDA!"
+    end
+    
+    ValidateBtn.MouseButton1Click:Connect(function()
+        local inputKey = KeyBox.Text
+        if inputKey == "" then
+            ShowMessage("Digite uma key primeiro!", true)
+            return
+        end
+        
+        local isValid, msg = ValidateKey(inputKey)
+        if isValid then
+            ShowMessage(msg, false)
+            task.wait(0.5)
+            ScreenGui:Destroy()
+            LoadMainScript()
+        else
+            ShowMessage(msg, true)
+        end
+    end)
+    
+    CopyBtn.MouseButton1Click:Connect(function()
+        CopyToClipboard(KeyBox.Text)
+    end)
+end
+
+-- =====================================================
+-- MAIN SCRIPT (HUB + CHEATS)
+-- =====================================================
+function LoadMainScript()
+    print("⚡ ATOM VOLLEYBALL HUB CARREGADO - KEY VÁLIDA ⚡")
+    
+    local tabs = CreateHubInterface()
+    
+    local autoFarmTab = tabs:CreateTab("🤖 AUTO FARM")
+    autoFarmTab:CreateToggle({
+        Name = "🎯 AUTO TREINO (Força/Agilidade)",
+        Callback = function(state)
+            toggles.autoFarm = state
+            if state then StartAutoFarm() end
+        end
+    })
+    
+    local autoHitTab = tabs:CreateTab("🏐 AUTO HIT")
+    autoHitTab:CreateToggle({
+        Name = "⚡ AUTO HIT (Ball Tracker)",
+        Callback = function(state)
+            toggles.autoHit = state
+            if state then StartAutoHit() end
+        end
+    })
+    
+    local hitboxTab = tabs:CreateTab("📏 HITBOX")
+    hitboxTab:CreateToggle({
+        Name = "🧲 HITBOX MAGNÉTICA",
+        Callback = function(state)
+            toggles.magneticHitbox = state
+            if state then StartMagneticHitbox() end
+        end
+    })
+    
+    local miscTab = tabs:CreateTab("⚙️ MISC")
+    miscTab:CreateToggle({
+        Name = "💤 ANTI AFK",
+        Callback = function(state)
+            toggles.antiAFK = state
+            if state then SetupAntiAFK() end
+        end
+    })
+    
+    miscTab:CreateButton({
+        Name = "🔄 REINICIAR PERSONAGEM",
+        Callback = function()
+            player.CharacterAdded:Wait()
+            character = player.Character
+            hrp = character:WaitForChild("HumanoidRootPart")
+            humanoid = character:WaitForChild("Humanoid")
+            print("Personagem reiniciado!")
+        end
+    })
+    
+    local infoTab = tabs:CreateTab("📋 INFO")
+    infoTab:CreateLabel("⚡ ATOM VOLLEYBALL HUB", Color3.fromRGB(0, 255, 204))
+    infoTab:CreateLabel("Versão: 2.0.0", Color3.fromRGB(150, 150, 150))
+    infoTab:CreateLabel("Desenvolvido para Lendas do Voleibol", Color3.fromRGB(150, 150, 150))
+    infoTab:CreateLabel("Keys válidas no script: " .. #KeysValidas, Color3.fromRGB(100, 255, 100))
+    
+    print("⚡ Hub carregado com sucesso! Use o botão flutuante.")
+end
+
+CreateKeySystem()
